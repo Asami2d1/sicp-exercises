@@ -1,0 +1,22 @@
+#lang racket
+(define (multiply a b)
+    (define (double x)
+        (* x 2))
+    (define (halve x)
+        (/ x 2))
+    (define (multiply-iter a b n)
+        (cond ((or (= b 0) (= a 0)) n)
+            ((= (remainder b 2) 1)
+                (multiply-iter a
+                    (- b 1)
+                    (+ n a)))
+            ((= (remainder b 2) 0)
+                (multiply-iter (double a)
+                (halve b)
+                n))))
+    (multiply-iter a b 0))
+
+(multiply 1 0)
+(multiply 1 1)
+(multiply 2 2)
+(multiply 2 1)

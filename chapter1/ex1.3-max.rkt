@@ -1,0 +1,6 @@
+#lang racket
+(define (max-2 a b)
+  (if (> a b) a b))
+(define (max-among-three a b c)
+  (max-2 (max-2 a b) c))
+
