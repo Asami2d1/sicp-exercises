@@ -1,0 +1,30 @@
+#lang racket
+(require "smallest-divisor.rkt")
+
+(define (search-for-primes n)
+  (start-prime-search n (current-milliseconds)))
+
+(define (start-prime-search n start-time)
+  (define (next-primes n k)
+    (define (next-odd n)
+      (if (even? n) (+ n 1)
+          (+ n 2)))
+    (cond ((= k 0))
+          ((prime? n)
+           (display n)
+           (newline)
+           (next-primes (next-odd n) (- k 1)))
+          (else
+           (next-primes (next-odd n) k))))
+  (next-primes n 10)
+  (report-search-prime (- (current-milliseconds) start-time)))
+
+(define (report-search-prime elapsed-time)
+  (display "***")
+  (display elapsed-time)
+  (display "ms")
+  (newline))
+
+(search-for-primes 1000)
+(search-for-primes 10000)
+(search-for-primes 100000)

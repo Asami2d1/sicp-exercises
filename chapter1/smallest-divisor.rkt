@@ -13,3 +13,4 @@
   (= n (smallest-divisor n)))
 
 (provide smallest-divisor)
+(provide prime?)

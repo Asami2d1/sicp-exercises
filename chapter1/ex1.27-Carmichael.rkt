@@ -1,0 +1,26 @@
+#lang racket
+(define (expmod base exp m)
+  (define (square x) (* x x))
+  (cond ((= exp 0) 1)
+        ((even? exp)
+         (remainder (square (expmod base (/ exp 2) m))
+                    m))
+        (else
+         (remainder (* base (expmod base (- exp 1) m))
+                    m))))
+
+(define (carmichael-check n)
+  (define (carmichael-check-helper n a)
+    (cond ((> a n) true)
+          ((= (expmod a n n)
+              (remainder a n))
+           (carmichael-check-helper n (+ a 1)))
+          (else false)))
+  (carmichael-check-helper n 1))
+
+(carmichael-check 561)
+(carmichael-check 1105)
+(carmichael-check 1729)
+(carmichael-check 2465)
+(carmichael-check 2821)
+(carmichael-check 6601)

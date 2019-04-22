@@ -1,0 +1,30 @@
+#lang racket
+(require "fermat-test.rkt")
+
+(define (search-for-primes n times)
+  (start-prime-search n (current-milliseconds) times))
+
+(define (start-prime-search n start-time times)
+  (define (next-primes n k)
+    (define (next-odd n)
+      (if (even? n) (+ n 1)
+          (+ n 2)))
+    (cond ((= k 0))
+          ((fast-prime? n times)
+           (display n)
+           (newline)
+           (next-primes (next-odd n) (- k 1)))
+          (else
+           (next-primes (next-odd n) k))))
+  (next-primes n 10)
+  (report-search-prime (- (current-milliseconds) start-time)))
+
+(define (report-search-prime elapsed-time)
+  (display "***")
+  (display elapsed-time)
+  (display "ms")
+  (newline))
+
+(search-for-primes 1000 1000)
+(search-for-primes 10000 1000)
+(search-for-primes 100000 1000)
