@@ -1,0 +1,26 @@
+#lang racket
+(define (make-point x y)
+  (cons x y))
+
+(define (x-point point)
+  (car point))
+
+(define (y-point point)
+  (cdr point))
+
+(define (make-rect-1 diagonal-point-1 diagonal-point-2)
+  (cons diagonal-point-1 diagonal-point-2))
+
+(define (calc-peri rect)
+  (+ (* (abs (- (x-point (car rect))
+                (x-point (cdr rect))))
+        2)
+     (* (abs (- (y-point (car rect))
+                (y-point (cdr rect))))
+        2)))
+
+(define (calc-area rect)
+  (* (abs (- (x-point (car rect))
+             (x-point (cdr rect))))
+     (abs (- (y-point (car rect))
+             (y-point (cdr rect))))))

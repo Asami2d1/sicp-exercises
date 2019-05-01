@@ -11,5 +11,7 @@
           (try next))))
   (try first-guess))
 
-(fixed-point (λ (x) (+ 1 (/ 1 x)))
-             1.0)
+;(fixed-point (λ (x) (+ 1 (/ 1 x)))
+;             1.0)
+
+(provide fixed-point)

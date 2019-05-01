@@ -1,0 +1,15 @@
+#lang racket
+(require "ex1.43-repeat.rkt")
+
+(define dx 0.1)
+
+(define (smooth f)
+  (λ (x)
+    (/ (+ (f (- x dx))
+          (f x)
+          (f (+ x dx)))
+       3)))
+
+(define (smooth-n f n)
+  (λ (x)
+    (((repeat smooth n) f) x)))
